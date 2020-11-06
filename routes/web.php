@@ -20,11 +20,8 @@ Route::prefix('admin')
         ->namespace('admin')
         ->middleware('auth','admin')
         ->group(function () {
-            Route::get('/', 'DashboardController@index')->name('dashboard');
-
-
-            
+            Route::get('/', 'DashboardController@index')->name('dashboard');        
         });
-Auth::routes();
+        Auth::routes(['verify' => true]);
 
 
