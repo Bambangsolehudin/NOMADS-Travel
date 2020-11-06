@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Request\Admin\TravelPackageRequest;
 use App\TravelPackage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TravelPackageController extends Controller
 {
@@ -29,7 +31,7 @@ class TravelPackageController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.travel-package.create');
     }
 
     /**
@@ -40,7 +42,11 @@ class TravelPackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        TravelPackage::create($data);
+        return redirect()->route('travel-package.index');
     }
 
     /**
