@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Request\Admin\TravelPackageRequest;
+use App\Http\Requests\Admin\TravelPackageRequest;
 use App\TravelPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -40,7 +40,7 @@ class TravelPackageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TravelPackageRequest $request)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
@@ -68,7 +68,12 @@ class TravelPackageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = TravelPackage::findorFail($id);
+
+
+        return view('pages.admin.travel-package.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -78,9 +83,15 @@ class TravelPackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TravelPackageRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        $item = TravelPackage::findorFail($id);
+        
+        $item->update($data);
+        return redirect()->route('travel-package.index');
     }
 
     /**
