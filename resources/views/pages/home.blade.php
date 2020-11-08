@@ -75,6 +75,10 @@
             </div>
         @endforeach
       </div>
+
+      <div class="text-center mt-4 " >
+        <a href="{{route('detailall')}}" class="btn btn-dark px-4" style="color: aliceblue;">See Full</a>
+      </div>
     </div>
   </section>
 

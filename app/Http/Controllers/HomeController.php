@@ -14,8 +14,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $items = TravelPackage::with(['galleries'])->get();
+        $items = TravelPackage::take(4)->with(['galleries'])->get();
         return view('pages.home',[
+            'items' => $items
+        ]);
+    }
+    public function detailall()
+    {
+        $items = TravelPackage::with(['galleries'])->get();
+        return view('pages.detailall',[
             'items' => $items
         ]);
     }
