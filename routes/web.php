@@ -46,6 +46,13 @@ Route::prefix('admin')
             Route::resource('transaction', 'TransactionController');
         });
         
-        Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
+
+
+// midtrans
+Route::post('/midtrans/callback'. 'MidtransController@notificationHandler')
+Route::post('/midtrans/finish'. 'MidtransController@finishRedirect')
+Route::post('/midtrans/unfinish'. 'MidtransController@unfinishRedirect')
+Route::post('/midtrans/errorr'. 'MidtransController@errorRedirect')
 
 

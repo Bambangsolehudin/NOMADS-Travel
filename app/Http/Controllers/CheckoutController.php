@@ -123,13 +123,14 @@ class CheckoutController extends Controller
                 'gross_amount' => (int) $transaction->transaction_total
             ],
             'customer_details' =>[
-                'firstname' => $transaction->user->name,
+                'first_name' => $transaction->user->name,
                 'email' => $transaction->user->email,
             ],
             'enabled_payments'=>['gopay'],
             'vtweb' => []
         ];
 
+        dd($midtrans_params);
         try {
             //ambil halaman payment midtrans
             $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
