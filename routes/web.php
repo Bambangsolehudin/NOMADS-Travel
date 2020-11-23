@@ -44,15 +44,17 @@ Route::prefix('admin')
             Route::resource('travel-package', 'TravelPackageController'); 
             Route::resource('gallery', 'GalleryController');
             Route::resource('transaction', 'TransactionController');
+            Route::get('/pdf','TransactionController@generatePDF')->name('print');
+            Route::get('/excel', 'TransactionController@laporanExcel')->name('printExcel');
         });
         
 Auth::routes(['verify' => true]);
 
 
 // midtrans
-Route::post('/midtrans/callback'. 'MidtransController@notificationHandler')
-Route::post('/midtrans/finish'. 'MidtransController@finishRedirect')
-Route::post('/midtrans/unfinish'. 'MidtransController@unfinishRedirect')
-Route::post('/midtrans/errorr'. 'MidtransController@errorRedirect')
+Route::post('/midtrans/callback'. 'MidtransController@notificationHandler');
+Route::post('/midtrans/finish'. 'MidtransController@finishRedirect');
+Route::post('/midtrans/unfinish'. 'MidtransController@unfinishRedirect');
+Route::post('/midtrans/errorr'. 'MidtransController@errorRedirect');
 
 

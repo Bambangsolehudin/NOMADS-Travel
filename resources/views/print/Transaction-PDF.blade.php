@@ -1,6 +1,4 @@
-@extends('layouts.admin')
 
-@section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -8,13 +6,10 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
     </div>
-    <div class="text-right">
-    <a href="{{ route('print')}}" class="btn btn-warning" target="_blank"> Cetak PDF</a>
-    <a href="{{ route('printExcel')}}" class="btn btn-success" target="_blank"> Cetak Excel</a>
-    </div>
+
     <!-- Content Row -->
     <div class="row">
-    
+   
 
         <div class="card-body">
             <div class="table-responsive">
@@ -27,7 +22,7 @@
                         <th>Visa</th>
                         <th>Total</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -39,22 +34,7 @@
                             <td>${{ $item->additional_visa }}</td>
                             <td>${{ $item->transaction_total }}</td>
                             <td>{{ $item->transaction_status }}</td>
-                            <td>
-                                <a href="{{ route('transaction.show', $item->id) }}" class="btn btn-primary">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="{{ route('transaction.edit', $item->id) }}" class="btn btn-info">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </a>
-                                <form action="{{ route('transaction.destroy', $item->id) }}" method="post" class="d-inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-
-                            </td>
+                            
                         </tr>
                     @empty
                         <td colspan="7" class="text-center">
@@ -68,4 +48,4 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-@endsection
+

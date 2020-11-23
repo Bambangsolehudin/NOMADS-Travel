@@ -1,7 +1,7 @@
 @extends('layouts.success')
 
 @section('title', 'Success')
-
+<!--  -->
 @section('content')
 <main>
   <div class="section-success d-flec align-items-center">
@@ -9,7 +9,7 @@
       <img src="{{url('frontend/images/ic_mail.png')}}" alt="" class="mt-5">
       <h1>Oops! </h1>
       <p>
-        your transacton is failed
+        Your transacton is failed
         <br />
         please contact our represantif if this problem occurs
       </p>

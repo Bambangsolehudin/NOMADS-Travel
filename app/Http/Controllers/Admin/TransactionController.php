@@ -7,9 +7,16 @@ use App\Http\Requests\Admin\TransactionRequest;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use PDF;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Excel;
+use App\Export;
 
 class TransactionController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -112,4 +119,29 @@ class TransactionController extends Controller
         return redirect()->route('transaction.index');
 
     }
+
+
+    public function generatePDF()
+    {
+        $items = Transaction::with([
+            'details', 'travel_package', 'user'
+        ])->get();
+        $pdf = PDF::loadView('print.Transaction-PDF', ['items'=>$items]);
+        return $pdf->download('Transaction-pdf.pdf');
+    }
+
+    public function laporanExcel()
+    {
+        // $items = Transaction::with([
+        //     'details', 'travel_package', 'user'
+        // ])->get();
+        return Excel::download(new Export, 'Transaction.xlsx');   
+        // Excel::create('new file', function($excel) {
+
+        //     $excel->sheet('first sheet', function($sheet) {
+        //         $sheet->loadView('print.Transaction-PDF', ['items'=>$items]);
+        //     });
+        // })->export('xls');
+    }
+
 }
