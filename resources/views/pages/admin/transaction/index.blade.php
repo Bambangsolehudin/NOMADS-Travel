@@ -10,7 +10,6 @@
     </div>
     <div class="text-right">
     <a href="{{ route('print')}}" class="btn btn-warning" target="_blank"> Cetak PDF</a>
-    <a href="{{ route('printExcel')}}" class="btn btn-success" target="_blank"> Cetak Excel</a>
     </div>
     <!-- Content Row -->
     <div class="row">
