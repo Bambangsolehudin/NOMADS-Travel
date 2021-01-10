@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
+// use Illuminate\Notifications\Notification;
 use App\Mail\TransactionSuccess;
 use App\Transaction;
 use Illuminate\Support\Facades\Mail;
-use Midtrans\Config
+use Midtrans\Config;
 use Midtrans\Notification;
 
 class MidtransController extends Controller
@@ -20,7 +20,7 @@ class MidtransController extends Controller
         Config::$is3ds = config('midtrans.is3ds');
 
         //buat notiifikasi
-        $notification = new Notification();''
+        $notification = new Notification();
 
         //ppp
         $order = explode('-', $notification->order_id );
@@ -50,7 +50,7 @@ class MidtransController extends Controller
             else if($status=='pending'){
                 $transaction->transaction_status = 'PENDING';
             }
-            else if($status=='deni'){
+            else if($status=='deny'){
                 $transaction->transaction_status = 'FAILED';
             }
             else if($status=='expire'){
@@ -116,16 +116,16 @@ class MidtransController extends Controller
     }
 
 
-    public function  finishRedirect(Request $request ) 
+    public function finishRedirect(Request $request) 
     {
         return view('pages.success');
     }
-    public function  unfinishRedirect(Request $request ) 
+    public function unfinishRedirect(Request $request) 
     {
         return view('pages.unfinish');
     }
     
-    public function errorRedirect(Request $request ) 
+    public function errorRedirect(Request $request) 
     {
         return view('pages.failed');
     }

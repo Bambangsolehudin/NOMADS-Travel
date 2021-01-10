@@ -109,49 +109,49 @@ class CheckoutController extends Controller
 
         $transaction->save();
 
-        // set konfigurasi midtrans
-        Config::$serverKey = config('midtrans.serverKey');
-        Config::$isProduction = config('midtrans.isProduction');
-        Config::$isSanitized = config('midtrans.isSanitized');
-        Config::$is3ds = config('midtrans.is3ds');
+        // // set konfigurasi midtrans
+        // Config::$serverKey = config('midtrans.serverKey');
+        // Config::$isProduction = config('midtrans.isProduction');
+        // Config::$isSanitized = config('midtrans.isSanitized');
+        // Config::$is3ds = config('midtrans.is3ds');
 
 
-        // buat array untuk dikirim ke midtrans
-        $midtrans_params = [
-            'transaction_details'=>[
-                'order_id ' => 'TEST-' . $transaction->id,
-                'gross_amount' => (int) $transaction->transaction_total
-            ],
-            'customer_details' =>[
-                'first_name' => $transaction->user->name,
-                'email' => $transaction->user->email,
-            ],
-            'enabled_payments'=>['gopay'],
-            'vtweb' => []
-        ];
+        // // buat array untuk dikirim ke midtrans
+        // $midtrans_params = [
+        //     'transaction_details'=>[
+        //         'order_id' => 'Transactions-' . $transaction->id,
+        //         'gross_amount' => (int) $transaction->transaction_total
+        //     ],
+        //     'customer_details' =>[
+        //         'first_name' => $transaction->user->name,
+        //         'email' => $transaction->user->email,
+        //     ],
+        //     'vtweb' =>[]  
+        // ];
 
-        dd($midtrans_params);
-        try {
-            //ambil halaman payment midtrans
-            $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
-
-            //redirect halaman midtrans
-            header('Location: '. $paymentUrl );
-        } catch (Exception $e) {
-            //throw $th;
-            echo $e->getMessage();
-        }
+        // // dd($midtrans_params);
+        // try {
+        //     //ambil halaman payment midtrans
+        //     $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
+        //     // dd($paymentUrl);
+        //     //redirect halaman midtrans
+        //     header('Location: '. $paymentUrl );
+        //     dd($paymentUrl);
+        // } catch (Exception $e) {
+        //     //throw $th;
+        //     echo $e->getMessage();
+        // }
 
         
 
-        // //kirim email ke user e-tiketnya
-        // Mail::to($transaction->user)->send(
-        //     new TransactionSuccess($transaction)
-        // );
+        //kirim email ke user e-tiketnya
+        Mail::to($transaction->user)->send(
+            new TransactionSuccess($transaction)
+        );
 
-        // // return $transaction;
+        // return $transaction;
 
-        // return view('pages.success');
+        return view('pages.success');
     }
 
 }

@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/detailall', 'HomeController@detailall')->name('detailall');
 
@@ -52,9 +54,9 @@ Auth::routes(['verify' => true]);
 
 
 // midtrans
-Route::post('/midtrans/callback'. 'MidtransController@notificationHandler');
-Route::post('/midtrans/finish'. 'MidtransController@finishRedirect');
-Route::post('/midtrans/unfinish'. 'MidtransController@unfinishRedirect');
-Route::post('/midtrans/errorr'. 'MidtransController@errorRedirect');
+Route::post('/midtrans/callback', 'MidtransController@notificationHandler');
+Route::get('/midtrans/finish', 'MidtransController@finishRedirect');
+Route::get('/midtrans/unfinish', 'MidtransController@unfinishRedirect');
+Route::get('/midtrans/error', 'MidtransController@errorRedirect');
 
 
